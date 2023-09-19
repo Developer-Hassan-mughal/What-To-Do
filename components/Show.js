@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { toast } from "react-toastify";
 
 
@@ -13,13 +13,17 @@ const show = (props) => {
         setactivetask,
     }=props
 
-    // console.log(Newtask)
-    localStorage.setItem("Newtask", JSON.stringify([...Newtask]))
+    useEffect(() => {
+      localStorage.setItem("Newtask", JSON.stringify([...Newtask]))
+      }, [Newtask])
 
-
-    const deleteHandler= (index) =>{
+    
+    const deleteHandler = (index) =>{
       localStorage.clear("Newtask")
       setNewtask(Newtask.filter((t,i)=>(i !==index)))
+      localStorage.setItem("Newtask", JSON.stringify([...Newtask]))
+
+
         toast.info("Task Deleted",
         {
             position: "top-center",
@@ -34,7 +38,6 @@ const show = (props) => {
         setstatus(status)
         setparagraph(paragraph)
         setactivetask(index)
-        // ref.current?.scrollIntoView({ behavior: 'smooth' });
           window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -66,7 +69,6 @@ const show = (props) => {
       )
     })
   }
-
 
 
   return (

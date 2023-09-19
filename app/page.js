@@ -1,15 +1,26 @@
 "use client"
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import Create from '@/components/Create'
 import Show from '@/components/Show'
 
 const page = () => {
-
+  
   const [title, settitle] = useState("")
   const [status, setstatus] = useState("Due")
   const [paragraph, setparagraph] = useState("")
-  const [Newtask, setNewtask] = useState( JSON.parse(localStorage.getItem("Newtask")) || [])
+  // let text = localStorage.getItem("Newtask");
+  // let obj = JSON.parse(text);
+  // const [Newtask, setNewtask] = useState( obj || [])
+
+  const [Newtask, setNewtask] = useState( [])
   const [activetask, setactivetask] = useState(null)
+
+  useEffect(() => {
+    const obj = JSON.parse(localStorage.getItem("Newtask")) || []
+    setNewtask(obj)
+  }, [])
+  
+
 
   return (
   <div className='container px-5 py-2'   style={{backgroundColor: "white"}}>
